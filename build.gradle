@@ -8,6 +8,7 @@
 
 // Apply the java-library plugin to add support for Java Library
 apply plugin: 'java-library'
+//apply plugin: 'java'
 
 // In this section you declare where to find the dependencies of your project
 repositories {
@@ -32,27 +33,3 @@ dependencies {
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
 }
-
-task helloWorld {
-    doLast {
-        println 'Hello world!'
-    }
-}
-
-task startSession << {
-    chant()
-}
-
-def chant() {
-    ant.echo(message: 'Repeat after me...')
-}
-
-3.times {
-    task "yayGradle$it" << {
-        println 'Gradle rocks'
-    }
-}
-
-yayGradle0.dependsOn startSession
-yayGradle2.dependsOn yayGradle1, yayGradle0
-task groupTherapy(dependsOn: yayGradle2)
