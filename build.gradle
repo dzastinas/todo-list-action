@@ -34,37 +34,20 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 }
 
-version = '0.1-SNAPSHOT'
-task printVersion (group: 'versioning', description: 'Prints project version.'){
-    doLast {
-        logger.quiet "Version: $version"
+ext.versionFile = file('version.properties')
+
+task loadVersion {
+    project.version = readVersion()
+}
+
+ProjectVersion readVersion() {
+    logger.quiet 'Reading the version file.'
+    if (!versionFile.exists()) {
+        throw new GradleException("Required version file does not exist: $versionFile.canonicalPath")
     }
-}
-
-task first << { println "first" }
-task second << { println "second" }
-
-task printVersion2(dependsOn: [second, first]) {
-    group = 'versioning'
-    description = 'Prints project version.'
-    doLast {
-        logger.quiet "Version: $version"
+    Properties versionProps = new Properties()
+    versionFile.withInputStream { stream ->
+        versionProps.load(stream)
     }
-}
-task third << { println "third" }
-third.dependsOn('printVersion2')
-
-project.ext.myProp = 'myValue'
-ext {
-    someOtherProp = 123
-}
-assert myProp == 'myValue'
-println project.someOtherProp
-ext.someOtherProp = 567
-println project.someOtherProp
-
-assert project.exampleProp == 'myValue'
-task printGradleProperty {}
-printGradleProperty.doLast {
-    println "Second property: $exampleProp"
+    new ProjectVersion(versionProps.major.toInteger(), versionProps.minor.toInteger(), versionProps.release.toBoolean())
 }

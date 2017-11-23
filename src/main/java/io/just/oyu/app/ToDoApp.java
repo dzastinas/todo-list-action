@@ -1,7 +1,8 @@
-package app;
+package io.just.oyu.app;
 
-import utils.CommandLineInput;
-import utils.CommandLineInputHandler;
+
+import io.just.oyu.utils.CommandLineInput;
+import io.just.oyu.utils.CommandLineInputHandler;
 
 public class ToDoApp {
 

@@ -1,6 +1,6 @@
-package repository;
+package io.just.oyu.repository;
 
-import model.ToDoItem;
+import io.just.oyu.model.ToDoItem;
 
 import java.util.ArrayList;
 import java.util.Collections;

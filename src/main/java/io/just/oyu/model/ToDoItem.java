@@ -1,4 +1,4 @@
-package model;
+package io.just.oyu.model;
 
 public class ToDoItem implements Comparable<ToDoItem> {
     private Long id;

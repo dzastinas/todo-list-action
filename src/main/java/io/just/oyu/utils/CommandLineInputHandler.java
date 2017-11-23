@@ -1,8 +1,8 @@
-package utils;
+package io.just.oyu.utils;
 
-import model.ToDoItem;
-import repository.InMemoryToDoRepository;
-import repository.ToDoRepository;
+import io.just.oyu.model.ToDoItem;
+import io.just.oyu.repository.InMemoryToDoRepository;
+import io.just.oyu.repository.ToDoRepository;
 
 import java.util.Collection;
 
