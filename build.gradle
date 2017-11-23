@@ -33,3 +33,25 @@ dependencies {
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
 }
+
+version = '0.1-SNAPSHOT'
+task printVersion {
+    doLast {
+        println "Version: $version"
+    }
+}
+
+project.ext.myProp = 'myValue'
+ext {
+    someOtherProp = 123
+}
+assert myProp == 'myValue'
+println project.someOtherProp
+ext.someOtherProp = 567
+println project.someOtherProp
+
+assert project.exampleProp == 'myValue'
+task printGradleProperty {}
+printGradleProperty.doLast {
+    println "Second property: $exampleProp"
+}
