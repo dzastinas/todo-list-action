@@ -1,4 +1,5 @@
 import io.just.oyu.ProjectVersion
+import io.just.oyu.ReleaseVersionTask
 
 apply plugin: 'java-library'
 
@@ -37,4 +38,15 @@ ProjectVersion readVersion() {
         versionProps.load(stream)
     }
     new ProjectVersion(versionProps.major.toInteger(), versionProps.minor.toInteger(), versionProps.release.toBoolean())
+}
+
+task printVersion(group: 'versioning', description: 'Prints project version.') {
+    doLast {
+        logger.quiet "Version: $version"
+    }
+}
+
+task makeReleaseVersion(type: ReleaseVersionTask) {
+    release = version.release
+    destFile = versionFile
 }
