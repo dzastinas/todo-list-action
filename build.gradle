@@ -35,11 +35,24 @@ dependencies {
 }
 
 version = '0.1-SNAPSHOT'
-task printVersion {
+task printVersion (group: 'versioning', description: 'Prints project version.'){
     doLast {
-        println "Version: $version"
+        logger.quiet "Version: $version"
     }
 }
+
+task first << { println "first" }
+task second << { println "second" }
+
+task printVersion2(dependsOn: [second, first]) {
+    group = 'versioning'
+    description = 'Prints project version.'
+    doLast {
+        logger.quiet "Version: $version"
+    }
+}
+task third << { println "third" }
+third.dependsOn('printVersion2')
 
 project.ext.myProp = 'myValue'
 ext {
